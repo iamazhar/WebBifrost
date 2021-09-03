@@ -12,10 +12,7 @@ struct WBUserScript {
   let forMainframeOnly: Bool
 }
 
-final class WebBridgeController: UIViewController, WKScriptMessageHandler {
-  func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-    // TODO: -
-  }
+final class WebBridgeController: UIViewController {
   
   public var backgroundColor: UIColor?
   public var handlers: [WBMessageHandler]
@@ -57,4 +54,12 @@ final class WebBridgeController: UIViewController, WKScriptMessageHandler {
     webview = WKWebView(frame: .zero, configuration: configuration)
   }
   
+}
+
+extension WebBridgeController: WKScriptMessageHandler {
+  func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+    if let handler = handlers.first(where: { $0.name == message.name }) {
+      handler.action()
+    }
+  }
 }
