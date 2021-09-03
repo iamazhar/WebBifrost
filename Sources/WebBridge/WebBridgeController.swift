@@ -14,7 +14,12 @@ struct WBUserScript {
 
 final class WebBridgeController: UIViewController {
   
-  public var backgroundColor: UIColor?
+  public var backgroundColor: UIColor = .white {
+    didSet {
+      view.backgroundColor = backgroundColor
+    }
+  }
+  
   public var handlers: [WBMessageHandler]
   public var scripts: [WBUserScript]
   
@@ -23,9 +28,7 @@ final class WebBridgeController: UIViewController {
   init(messageHandlers handlers: [WBMessageHandler], userScripts scripts: [WBUserScript]) {
     self.handlers = handlers
     self.scripts = scripts
-    
     super.init(nibName: nil, bundle: nil)
-    self.view.backgroundColor = backgroundColor ?? .white
   }
   
   required init?(coder: NSCoder) {
