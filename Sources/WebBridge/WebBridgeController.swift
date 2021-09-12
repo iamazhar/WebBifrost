@@ -14,6 +14,7 @@ struct WBUserScript {
 
 class WebBridgeController: UIViewController {
   
+  // MARK: - Properties
   public var backgroundColor: UIColor = .white {
     didSet {
       view.backgroundColor = backgroundColor
@@ -25,6 +26,8 @@ class WebBridgeController: UIViewController {
   
   private(set) var webview: WKWebView = WKWebView()
   
+  // MARK: - init
+  
   init(messageHandlers handlers: [WBMessageHandler], userScripts scripts: [WBUserScript]) {
     self.handlers = handlers
     self.scripts = scripts
@@ -35,8 +38,11 @@ class WebBridgeController: UIViewController {
     fatalError("init(coder:) has not been implemented")
   }
   
+  // MARK: - View lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    view.backgroundColor = backgroundColor
     
     let configuration = WKWebViewConfiguration()
     let preferences = WKPreferences()
