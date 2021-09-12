@@ -12,7 +12,7 @@ public struct WBUserScript {
   let forMainframeOnly: Bool
 }
 
-open class WebBridgeController: UIViewController {
+public class WebBridgeController: UIViewController {
   
   // MARK: - Properties
   public var backgroundColor: UIColor = .white {
