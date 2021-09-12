@@ -1,18 +1,18 @@
 import WebKit
 import UIKit
 
-struct WBMessageHandler {
+public struct WBMessageHandler {
   let name: String
   let action: () -> Void
 }
 
-struct WBUserScript {
+public struct WBUserScript {
   let javascript: String
   let injectionTime: WKUserScriptInjectionTime
   let forMainframeOnly: Bool
 }
 
-class WebBridgeController: UIViewController {
+open class WebBridgeController: UIViewController {
   
   // MARK: - Properties
   public var backgroundColor: UIColor = .white {
@@ -34,12 +34,12 @@ class WebBridgeController: UIViewController {
     super.init(nibName: nil, bundle: nil)
   }
   
-  required init?(coder: NSCoder) {
+  required public init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
   // MARK: - View lifecycle
-  override func viewDidLoad() {
+  open override func viewDidLoad() {
     super.viewDidLoad()
     
     view.backgroundColor = backgroundColor
@@ -66,7 +66,7 @@ class WebBridgeController: UIViewController {
 }
 
 extension WebBridgeController: WKScriptMessageHandler {
-  func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+  public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
     if let handler = handlers.first(where: { $0.name == message.name }) {
       handler.action()
     }
